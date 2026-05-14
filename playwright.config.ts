@@ -1,36 +1,53 @@
+/**
+ * Playwright Test Configuration for defining test settings and projects
+ * - Sets up the testing environment, including test directories, parallel execution, retries, reporting, and browser projects
+ * - Includes environment variable management using dotenv for dynamic base URLs
+ */
+
 import { defineConfig, devices } from '@playwright/test';
 
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
+import dotenv from 'dotenv';
+import path from 'path';
+dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './tests',
+  testDir: './tests', // Define where to put tests
+
   /* Run tests in files in parallel */
   fullyParallel: true,
+
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
+  
   /* Retry on CI only */
+  // If CI is set = retries are run twice
   retries: process.env.CI ? 2 : 0,
+
   /* Opt out of parallel tests on CI. */
+  // If CI is not set (undefined), the number of workers defaults to the number of cores in your system
   workers: process.env.CI ? 1 : undefined,
+
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
+
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
-    // baseURL: 'http://localhost:3000',
+    baseURL: 'https://www.saucedemo.com/',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    screenshot: 'only-on-failure'
   },
+
+  outputDir: 'test-results', // Folder for test artifacts such as screenshots, videos, traces, etc.
 
   /* Configure projects for major browsers */
   projects: [
@@ -47,6 +64,31 @@ export default defineConfig({
     {
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
+    },
+
+    // For running all tests against all browsers: Chrome, Firefox, and Safari
+    {
+      name: 'all-browsers-and-tests',
+      use: {
+        baseURL: 'https://www.saucedemo.com/',
+        ...devices['Desktop Chrome']
+      },
+    },
+
+    {
+      name: 'all-browsers-and-tests',
+      use: {
+        baseURL: 'https://www.saucedemo.com/',
+        ...devices['Desktop Firefox']
+      },
+    },
+
+    {
+      name: 'all-browsers-and-tests',
+      use: {
+        baseURL: 'https://www.saucedemo.com/',
+        ...devices['Desktop Safari']
+      },
     },
 
     /* Test against mobile viewports. */
