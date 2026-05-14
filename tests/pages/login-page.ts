@@ -6,6 +6,8 @@ class LoginPage {
     readonly usernameField: Locator;
     readonly passwordField: Locator;
     readonly loginButton: Locator;
+    readonly errorMessage: Locator;
+    readonly errorText = "Epic sadface: Username and password do not match any user in this service";
 
     // Constructor
     constructor(page: Page) {
@@ -13,6 +15,7 @@ class LoginPage {
         this.usernameField = page.getByPlaceholder('Username');
         this.passwordField = page.getByPlaceholder('Password');
         this.loginButton = page.getByRole('button', { name: 'Login' });
+        this.errorMessage = page.getByText(this.errorText);
     }
 
     // Methods
@@ -52,6 +55,14 @@ class LoginPage {
      */
     async checkLoggedIn() {
         await expect(this.page).toHaveURL(/.*inventory.html/);
+    }
+
+    /**
+     * Checks for an unsuccessful login due to invalid credentials
+     */
+    async checkInvalidCredentials() {
+        await expect(this.errorMessage).toBeVisible();
+        
     }
 }
 
