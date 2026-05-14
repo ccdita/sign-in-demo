@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "Playwright tests for signing into a demo website",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test-ui-c": "npx playwright test tests/setup/ --project=chromium",
+    "test-ui-h": "npx playwright test tests/setup/ --headed",
+    "test-ui-all-browsers": "npx playwright test tests/setup/ --project=all-browsers-and-tests"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ccdita/sign-in-demo.git"
