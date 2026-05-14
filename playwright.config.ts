@@ -43,7 +43,7 @@ export default defineConfig({
     baseURL: 'https://www.saucedemo.com/',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+    trace: 'on',
     screenshot: 'only-on-failure'
   },
 
@@ -54,16 +54,19 @@ export default defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
+      dependencies: ['global setup'], // Add global setup project dependency
     },
 
     {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
+      dependencies: ['global setup'],
     },
 
     {
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
+      dependencies: ['global setup'],
     },
 
     // For running all tests against all browsers: Chrome, Firefox, and Safari
@@ -71,8 +74,9 @@ export default defineConfig({
       name: 'all-browsers-and-tests',
       use: {
         baseURL: 'https://www.saucedemo.com/',
-        ...devices['Desktop Chrome']
+        ...devices['Desktop Chrome'],
       },
+      dependencies: ['global setup'],
     },
 
     {
@@ -81,6 +85,7 @@ export default defineConfig({
         baseURL: 'https://www.saucedemo.com/',
         ...devices['Desktop Firefox']
       },
+      dependencies: ['global setup'],
     },
 
     {
@@ -89,6 +94,13 @@ export default defineConfig({
         baseURL: 'https://www.saucedemo.com/',
         ...devices['Desktop Safari']
       },
+      dependencies: ['global setup'],
+    },
+
+    // For global setup
+    {
+      name: 'global setup',
+      testMatch: /global\.setup\.ts/, // Match the file called global.setup.ts
     },
 
     /* Test against mobile viewports. */
