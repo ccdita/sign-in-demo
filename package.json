@@ -4,9 +4,12 @@
   "description": "Playwright tests for signing into a demo website",
   "main": "index.js",
   "scripts": {
-    "test-ui-c": "npx playwright test tests/setup/ --project=chromium",
-    "test-ui-h": "npx playwright test tests/setup/ --headed",
-    "test-ui-all-browsers": "npx playwright test tests/setup/ --project=all-browsers-and-tests"
+    "test-setup-c": "npx playwright test tests/setup/ --project=chromium",
+    "test-setup-h": "npx playwright test tests/setup/ --headed",
+    "test-setup-all": "npx playwright test tests/setup/ --project=all-browsers-and-tests",
+    "test-manual-login-c": "npx playwright test tests/specs/ --project=chromium",
+    "test-manual-login-h": "npx playwright test tests/specs/ --headed",
+    "test-manual-login-all": "npx playwright test tests/specs/ --project=all-browsers-and-tests"
   },
   "repository": {
     "type": "git",
