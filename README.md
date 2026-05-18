@@ -38,8 +38,8 @@ Both methods use the `login-page.ts` POM  to interact with the login page.
 | Using different user roles per test | |
 
 ## References
-- https://www.saucedemo.com/
-- https://playwright.dev/docs/test-configuration
-- https://playwright.dev/docs/test-global-setup-teardown#configure-globalsetup-and-globalteardown
-- https://testautomationu.applitools.com/playwright-intro/
-- https://testautomationu.applitools.com/playwright-advanced/
+- [Swag Labs Demo Website](https://www.saucedemo.com/)
+- [Configuration on Playwright Docs](https://playwright.dev/docs/test-configuration)
+- [Global setup and teardown on Playwright Docs](https://playwright.dev/docs/test-global-setup-teardown#configure-globalsetup-and-globalteardown)
+- [Introduction to Playwright course by Renata Andrade on Test Automation University](https://testautomationu.applitools.com/playwright-intro/)
+- [Advanced Playwright course by Renata Andrade on Test Automation University](https://testautomationu.applitools.com/playwright-advanced/)
